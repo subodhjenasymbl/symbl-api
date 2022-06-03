@@ -1,0 +1,91 @@
+openapi: 3.0.0
+info:
+  title: Symbl API
+  description: Symbl REST APIs
+  termsOfService: https://platform.symbl.ai
+  contact:
+    name: Support
+    url: https://platform.symbl.ai/contact
+    email: support@symbl.ai
+  version: 1.0.0
+externalDocs:
+  description: Symbl Documentation
+  url: https://docs.symbl.ai/docs/
+servers:
+- url: https://virtserver.swaggerhub.com/subodh.jena/Symbl/1.0.0
+  description: SwaggerHub API Auto Mocking
+- url: https://api.symbl.ai
+  description: Symbl API
+tags:
+- name: Authentication
+  description: Authentication
+- name: Telephony
+  description: Telephony
+- name: Async
+  description: Async
+- name: Conversation
+paths:
+  /oauth2/token:generate:
+    post:
+      tags:
+      - Authentication
+      summary: Generate Token
+      description: Generates an access_token
+      operationId: generateToken
+      parameters: []
+      requestBody:
+        description: Optional description in *Markdown*
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenRequest'
+        required: true
+      responses:
+        "200":
+          description: Successfully created accessToken.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TokenResponse'
+components:
+  schemas:
+    GeneralError:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+    TokenRequest:
+      type: object
+      properties:
+        type:
+          type: string
+        appId:
+          type: string
+        appSecret:
+          type: string
+    TokenResponse:
+      type: object
+      properties:
+        accessToken:
+          type: string
+        expiresIn:
+          type: integer
+          format: int32
+  responses:
+    NotFound:
+      description: Entity not found.
+    IllegalInput:
+      description: Illegal input for operation.
+    GeneralError:
+      description: General Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GeneralError'
+  links: {}
+  callbacks: {}
