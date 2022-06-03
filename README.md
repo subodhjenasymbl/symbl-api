@@ -1,2 +1,2 @@
-# Symbl OpenAPI3 Spec
+# Symbl API Documentation
 Symbl REST API Documentation
